@@ -2,7 +2,7 @@
 
 **A Bayesian shrinkage model for separating real on-base skill from April noise**
 
-*Clayton (Clay) Steinocher · Information Science, University of South Florida · [claysteinocher@gmail.com / https://www.linkedin.com/in/clayton-steinocher/]*
+*Clayton Steinocher · Information Science, University of South Florida · [claysteinocher@gmail.com / https://www.linkedin.com/in/clayton-steinocher/]*
 
 ---
 
@@ -76,6 +76,25 @@ These three were chosen from the model's largest corrections to show its range: 
 
 **Aaron Judge: where the model is too cautious.** Judge's .521 April was real skill, not luck. The model pulled him to .397; he hit .440 afterward. The model still beat raw April, but it treated a true superstar like everyone else. This is the clearest argument for the next step below.
 
+## Luck or skill? A spatial look at the best and worst calls
+
+![Spray charts for Kelly and Judge](day5_spray_kelly_judge.png)
+
+To see why the model was right about Kelly and wrong about Judge, I mapped every ball each of them put in play. Statcast records where a batted ball lands as pixel coordinates on a field diagram. I converted those into feet from home plate, which gives each ball a real location and spray angle. I then compared each player's actual hit rate on contact with Statcast's expected batting average (xBA): how often contact with that exit velocity and launch angle usually becomes a hit.
+
+| Player | Period | Balls in play | Hit rate | xBA | Luck gap | Avg exit velo | Hard-hit % |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Aaron Judge | April | 89 | .562 | .443 | +.119 | 95.5 | 57% |
+| Aaron Judge | May–Sept | 298 | .430 | .415 | +.015 | 95.3 | 59% |
+| Carson Kelly | April | 45 | .400 | .352 | +.048 | 93.9 | 60% |
+| Carson Kelly | May–Sept | 248 | .298 | .293 | +.006 | 87.9 | 37% |
+
+I expected Kelly's April to look like luck and Judge's to look like skill. The data said something more useful:
+
+- **Both were lucky in April.** Judge's hits actually outran his contact quality by more than Kelly's did (+.119 vs. +.048). By May–September, both luck gaps had nearly disappeared. Luck is the part of a hot start that doesn't last.
+- **The difference was what sat underneath.** Judge's contact quality held steady: 95.5 mph average exit velocity in April, 95.3 afterward, and an xBA of .443 that is elite on its own. Kelly's collapsed: from 93.9 mph to 87.9, and his hard-hit rate from 60% to 37%.
+- **The lesson for the model.** The luck gap says how much of a hot start to discount; contact quality says what's left once you do. Kelly's April hard contact came on only 45 balls in play, so it was a small sample too. Contact-quality data stabilizes faster than OBP, which makes it a natural input for the next version of this model.
+
 ## The Moneyball list
 
 ![Top 15 by model estimate](day4_top15_true_obp.png)
@@ -91,7 +110,7 @@ Ranking hitters by the model's estimate is the "who truly gets on base" list. He
 ## Limitations and next steps
 
 - **Add prior-season data.** Using 2024 OBP or walk rate as a predictor would give the model information from outside the sample, fix the over-shrinking of established stars like Judge, and avoid the circularity problem from the walk-rate model.
-- **Use plate-discipline inputs.** Statcast chase rate and contact rate stabilize faster than OBP and aren't mechanically part of it.
+- **Use plate-discipline and contact-quality inputs.** Statcast chase rate, exit velocity, and xBA stabilize faster than OBP and aren't mechanically part of it. The spatial section shows why contact quality matters.
 - **One season, one split.** Repeating the analysis across several seasons and cutoff dates would show how stable the 250-PA prior is.
 - **Survivorship.** Requiring 200 rest-of-season opportunities excludes hitters who were benched or demoted after poor starts.
 
@@ -105,3 +124,4 @@ Requires R 4.5, `tidyverse`, `baseballr`, and `brms` (run here with the `cmdstan
 | `day2_explore_baseline.R` | Exploration and baseline errors |
 | `day3_models.R` | Fits empirical Bayes and both brms models; saves `obp_2025_preds.csv` |
 | `day4_evaluate.R` | Charts and player-level comparisons |
+| `day5_spatial.R` | Statcast spray charts and luck-vs-skill table for Kelly and Judge |
