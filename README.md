@@ -2,7 +2,7 @@
 
 **A Bayesian shrinkage model for separating real on-base skill from April noise**
 
-*Clayton Steinocher · Information Science, University of South Florida · [claysteinocher@gmail.com / https://www.linkedin.com/in/clayton-steinocher/]*
+*Clayton Steinocher · Information Science, University of South Florida · [Email](mailto:claysteinocher@gmail.com) · [LinkedIn](https://www.linkedin.com/in/clayton-steinocher/)*
 
 ---
 
@@ -74,7 +74,7 @@ These three were chosen from the model's largest corrections to show its range: 
 
 **Ramón Laureano: the false alarm.** Laureano opened at .216 over just 51 opportunities, the model's largest upward correction. It said .307, close to average. He hit .357 the rest of the way. A team reading raw April would have benched a productive hitter.
 
-**Aaron Judge: where the model is too cautious.** Judge's .521 April was real skill, not luck. The model pulled him to .397; he hit .440 afterward. The model still beat raw April, but it treated a true superstar like everyone else. This is the clearest argument for the next step below.
+**Aaron Judge: where the model is too cautious.** Judge's .521 April was inflated by luck, but it sat on top of real, elite skill (see the spatial section below). The model pulled him to .397; he hit .440 afterward. The model still beat raw April, but it treated a true superstar like everyone else. This is the clearest argument for the next step below.
 
 ## Luck or skill? A spatial look at the best and worst calls
 
